@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://pe83812ij4hw"]
+
+[ext_resource type="Script" path="res://Script/points.gd" id="1_6cexh"]
+[ext_resource type="Resource" uid="uid://cew2pnypg0vti" path="res://Properties/Score_2.tres" id="2_4tldc"]
+[ext_resource type="FontFile" uid="uid://d1jv77n3o6ljb" path="res://Fonts/Simple Handmade.otf" id="3_0vdqn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tbl8y"]
+radius = 5.09902
+
+[node name="Points_2" type="Area2D" groups=["point_node"]]
+script = ExtResource("1_6cexh")
+properties = ExtResource("2_4tldc")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -13.0
+offset_right = 21.0
+offset_bottom = 14.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_0vdqn")
+theme_override_font_sizes/font_size = 30
+text = "25"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tbl8y")

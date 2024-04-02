@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Points" load_steps=2 format=3 uid="uid://cew2pnypg0vti"]
+
+[ext_resource type="Script" path="res://Properties/points_properties.gd" id="1_mnyi0"]
+
+[resource]
+script = ExtResource("1_mnyi0")
+score = 25

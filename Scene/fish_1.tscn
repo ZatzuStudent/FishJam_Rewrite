@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://62n2u0pyarry"]
+
+[ext_resource type="Script" path="res://Script/fish_1.gd" id="1_2srx1"]
+[ext_resource type="Resource" uid="uid://cptpvt1ourg25" path="res://Properties/Fish_1_Properties.tres" id="2_4657g"]
+[ext_resource type="Texture2D" uid="uid://dcnanxhae8vfs" path="res://Art_Assets/LVL1small_spritesheet.png" id="3_ithic"]
+[ext_resource type="PackedScene" uid="uid://gcqs0pecbut8" path="res://Scene/points_1.tscn" id="3_wj8hk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t4fhd"]
+height = 52.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0w5c"]
+atlas = ExtResource("3_ithic")
+region = Rect2(0, 0, 76, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ny2i5"]
+atlas = ExtResource("3_ithic")
+region = Rect2(76, 0, 76, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_817sq"]
+atlas = ExtResource("3_ithic")
+region = Rect2(152, 0, 76, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ihwr"]
+atlas = ExtResource("3_ithic")
+region = Rect2(228, 0, 76, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x41d5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0w5c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ny2i5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_817sq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ihwr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oi4g1"]
+radius = 24.1868
+
+[node name="Fish_1" type="CharacterBody2D" groups=["enimy_fish"]]
+collision_mask = 2
+script = ExtResource("1_2srx1")
+properties = ExtResource("2_4657g")
+points = ExtResource("3_wj8hk")
+
+[node name="Body_Collision" type="CollisionShape2D" parent="."]
+position = Vector2(-22, 0.5)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_t4fhd")
+
+[node name="Fish_Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_x41d5")
+autoplay = "default"
+frame = 2
+frame_progress = 0.199734
+offset = Vector2(-22, -3)
+
+[node name="Viewer_Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Viewer_Area2D"]
+polygon = PackedVector2Array(12, 0, 143, -56, 143, 56)
+
+[node name="Mouth_Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mouth_Area2D"]
+shape = SubResource("CircleShape2D_oi4g1")
+
+[node name="Dir_Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="body_entered" from="Viewer_Area2D" to="." method="_on_viewer_area_2d_body_entered"]
+[connection signal="body_exited" from="Viewer_Area2D" to="." method="_on_viewer_area_2d_body_exited"]
+[connection signal="timeout" from="Dir_Timer" to="." method="_on_dir_timer_timeout"]

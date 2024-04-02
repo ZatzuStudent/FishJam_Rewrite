@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://bbpv0ph5yruy2"]
+
+[ext_resource type="Script" path="res://Script/Camera2D.gd" id="1_2k7tg"]
+[ext_resource type="Script" path="res://Script/main.gd" id="1_2vn1s"]
+[ext_resource type="Texture2D" uid="uid://bpd1t0h4df06m" path="res://Art_Assets/dqw.png" id="1_hbj52"]
+[ext_resource type="PackedScene" uid="uid://3gq1o61xtg11" path="res://Scene/player.tscn" id="4_b0rqv"]
+[ext_resource type="PackedScene" uid="uid://62n2u0pyarry" path="res://Scene/fish_1.tscn" id="5_a4yor"]
+[ext_resource type="Script" path="res://Script/Fish1_Spawner.gd" id="5_cwbto"]
+[ext_resource type="PackedScene" uid="uid://biwi7b1yj5cdt" path="res://Scene/fish_2.tscn" id="6_vum3b"]
+[ext_resource type="PackedScene" uid="uid://cywmepp4dq1lu" path="res://Scene/player_ui.tscn" id="7_22f4u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7hyuk"]
+size = Vector2(144, 62)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_2vn1s")
+
+[node name="BackGround" type="Sprite2D" parent="."]
+scale = Vector2(2.691, 2.691)
+texture = ExtResource("1_hbj52")
+
+[node name="Player" parent="." instance=ExtResource("4_b0rqv")]
+position = Vector2(-46, 225)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("1_2k7tg")
+
+[node name="Area2D" type="Area2D" parent="Camera2D" groups=["Score_Area"]]
+position = Vector2(433, -289)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Area2D"]
+shape = SubResource("RectangleShape2D_7hyuk")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Camera2D/Area2D"]
+position = Vector2(1, -15)
+polygon = PackedVector2Array(-8, -7, -257, -91, -600, -621, 561, -190, 395, 506, 109, 220, 109, 49)
+
+[node name="Fish1_Spawner" type="Node2D" parent="."]
+position = Vector2(-146, -105)
+script = ExtResource("5_cwbto")
+fish_1 = ExtResource("5_a4yor")
+fish_2 = ExtResource("6_vum3b")
+
+[node name="Timer" type="Timer" parent="Fish1_Spawner"]
+autostart = true
+
+[node name="Timer2" type="Timer" parent="Fish1_Spawner"]
+autostart = true
+
+[node name="Spawn_Point_1" type="Node2D" parent="Fish1_Spawner"]
+position = Vector2(-464, -364)
+
+[node name="Spawn_Point_2" type="Node2D" parent="Fish1_Spawner"]
+position = Vector2(1778, 5)
+
+[node name="Spawn_Point_3" type="Node2D" parent="Fish1_Spawner"]
+position = Vector2(-892, 443)
+
+[node name="Fish_2" parent="Fish1_Spawner" instance=ExtResource("6_vum3b")]
+
+[node name="Player_UI" parent="." instance=ExtResource("7_22f4u")]
+
+[connection signal="area_entered" from="Camera2D/Area2D" to="Player_UI" method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Fish1_Spawner/Timer" to="Fish1_Spawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Fish1_Spawner/Timer2" to="Fish1_Spawner" method="_on_timer_2_timeout"]

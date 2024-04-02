@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Fishies" load_steps=2 format=3 uid="uid://cptpvt1ourg25"]
+
+[ext_resource type="Script" path="res://Properties/Fish_properties.gd" id="1_700uv"]
+
+[resource]
+script = ExtResource("1_700uv")
+speed = 30
+size = 1
+body_pos = -22
+meal_value = 1

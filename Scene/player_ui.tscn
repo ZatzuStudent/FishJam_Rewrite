@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://cywmepp4dq1lu"]
+
+[ext_resource type="Script" path="res://Script/Player_UI.gd" id="1_cw8rh"]
+[ext_resource type="FontFile" uid="uid://d1jv77n3o6ljb" path="res://Fonts/Simple Handmade.otf" id="3_71nj4"]
+[ext_resource type="Texture2D" uid="uid://1oyc3di4vxb3" path="res://Art_Assets/LVL1medium_spritesheet.png" id="4_d1jly"]
+[ext_resource type="Texture2D" uid="uid://dcnanxhae8vfs" path="res://Art_Assets/LVL1small_spritesheet.png" id="5_v3knn"]
+
+[node name="Player_UI" type="CanvasLayer"]
+script = ExtResource("1_cw8rh")
+
+[node name="Score _Label" type="Label" parent="."]
+offset_left = 869.0
+offset_top = 17.0
+offset_right = 1100.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_71nj4")
+theme_override_font_sizes/font_size = 70
+text = "Score: 000"
+
+[node name="Inhale_bar" type="ProgressBar" parent="."]
+modulate = Color(0.470588, 1, 1, 1)
+offset_left = 46.0
+offset_top = 594.0
+offset_right = 235.0
+offset_bottom = 603.0
+value = 100.0
+show_percentage = false
+
+[node name="Tummy_bar" type="ProgressBar" parent="."]
+offset_left = 125.0
+offset_top = 72.0
+offset_right = 522.0
+offset_bottom = 99.0
+show_percentage = false
+
+[node name="Fish_2" type="Sprite2D" parent="Tummy_bar"]
+position = Vector2(190, -33)
+scale = Vector2(0.741259, 0.836735)
+texture = ExtResource("4_d1jly")
+region_enabled = true
+region_rect = Rect2(0, 0, 143, 49)
+
+[node name="Fish_1" type="Sprite2D" parent="Tummy_bar"]
+position = Vector2(24, -33)
+texture = ExtResource("5_v3knn")
+region_enabled = true
+region_rect = Rect2(0, 0, 72, 49)
